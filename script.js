@@ -1,7 +1,3 @@
-// Import TensorFlow.js and the face detection model
-import * as tf from '@tensorflow/tfjs';
-import * as blazeface from '@tensorflow-models/blazeface';
-
 async function setupWebcam() {
     const webcamElement = document.getElementById('webcam');
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -14,6 +10,7 @@ async function setupWebcam() {
 }
 
 async function run() {
+    console.log("Starting to run")
     const model = await blazeface.load();
     const webcam = await setupWebcam();
     const canvas = document.getElementById('overlay');
