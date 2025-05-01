@@ -10,11 +10,18 @@ async function setupWebcam() {
 }
 
 async function run() {
-    console.log("Starting to run")
+    console.log("Starting to run");
     const model = await blazeface.load();
     const webcam = await setupWebcam();
     const canvas = document.getElementById('overlay');
     const ctx = canvas.getContext('2d');
+
+    const gridSize = 17;
+    const cellWidth = canvas.width / gridSize;
+    const cellHeight = canvas.height / gridSize;
+
+    let previousGridX = -1;
+    let previousGridY = -1;
 
     while (true) {
         const predictions = await model.estimateFaces(webcam, false);
@@ -24,11 +31,26 @@ async function run() {
         predictions.forEach(prediction => {
             const start = prediction.topLeft;
             const end = prediction.bottomRight;
-            const size = [end[0] - start[0], end[1] - start[1]];
+            const centerX = (start[0] + end[0]) / 2;
+            const centerY = (start[1] + end[1]) / 2;
+
+            // Calculate grid position
+            const gridX = Math.floor(centerX / cellWidth);
+            const gridY = Math.floor(centerY / cellHeight);
+
+            // Print the grid coordinates
+            // console.log(`Face is at grid position: (${gridX}, ${gridY})`);
+
+            // Update the image only if the grid position has changed
+            if (gridX !== previousGridX || gridY !== previousGridY) {
+                displayImageDynamically(gridX, gridY);
+                previousGridX = gridX;
+                previousGridY = gridY;
+            }
 
             // Draw the bounding box
             ctx.beginPath();
-            ctx.rect(start[0], start[1], size[0], size[1]);
+            ctx.rect(start[0], start[1], end[0] - start[0], end[1] - start[1]);
             ctx.lineWidth = 2;
             ctx.strokeStyle = 'red';
             ctx.stroke();
@@ -45,6 +67,20 @@ async function run() {
 
         await tf.nextFrame();
     }
+}
+
+function displayImageDynamically(gridX, gridY) {
+    const imageContainer = document.getElementById('imageContainer');
+    imageContainer.innerHTML = ''; // Clear any existing content
+
+    const indexFromCoords = 7272 + gridX * 17 + gridY;
+    const img = document.createElement('img');
+    img.src = 'chess/original/IMG_' + indexFromCoords + '.JPG'; // Path to your image
+    img.alt = 'Dynamic Image';
+    img.width = 640; // Set desired width
+    img.height = 480; // Set desired height
+
+    imageContainer.appendChild(img);
 }
 
 run(); 
