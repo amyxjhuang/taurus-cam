@@ -39,13 +39,14 @@ async function run() {
             const gridY = Math.floor(centerY / cellHeight);
 
             // Print the grid coordinates
-            // console.log(`Face is at grid position: (${gridX}, ${gridY})`);
 
             // Update the image only if the grid position has changed
             if (gridX !== previousGridX || gridY !== previousGridY) {
                 displayImageDynamically(gridX, gridY);
                 previousGridX = gridX;
                 previousGridY = gridY;
+                console.log(`(${gridX}, ${gridY})`);
+
             }
 
             // Draw the bounding box
@@ -71,8 +72,11 @@ async function run() {
 
 function displayImageDynamically(gridX, gridY) {
     const imageContainer = document.getElementById('imageContainer');
+    const y = 17-gridY;
+    const x = gridX;
+    console.log(`(${x}, ${y})`);
 
-    const indexFromCoords = 7272 + gridY * 17 + gridX;
+    const indexFromCoords = 7272 + y * 17 + x;
     const img = document.createElement('img');
     img.src = 'chess/original/IMG_' + indexFromCoords + '.JPG'; // Path to your image
     img.alt = 'Dynamic Image';
@@ -90,7 +94,7 @@ function displayImageDynamically(gridX, gridY) {
     // Remove the previous image after the transition
     const previousImage = imageContainer.querySelector('img:not(.visible)');
     if (previousImage) {
-        console.log("REmoving previous image")
+        // console.log("REmoving previous image")
         previousImage.addEventListener('transitionend', () => {
             previousImage.remove();
         });
