@@ -100,4 +100,23 @@ function displayImageDynamically(gridX, gridY) {
         });
     }
 }
+
+
+// let activeContainerId = 'imageContainer1';
+
+// document.getElementById('toggleButton').addEventListener('click', () => {
+//     // Toggle the active container
+//     if (activeContainerId === 'imageContainer1') {
+//         activeContainerId = 'imageContainer2';
+//     } else {
+//         activeContainerId = 'imageContainer1';
+//     }
+
+//     // Update the display of the containers
+//     // document.getElementById('imageContainer1').style.display = activeContainerId === 'imageContainer1' ? 'block' : 'none';
+//     // document.getElementById('imageContainer2').style.display = activeContainerId === 'imageContainer2' ? 'block' : 'none';
+
+//     console.log(`Active container: ${activeContainerId}`);
+// });
+
 run(); 
