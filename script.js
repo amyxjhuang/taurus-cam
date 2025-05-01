@@ -72,13 +72,17 @@ async function run() {
 
 function displayImageDynamically(gridX, gridY) {
     const imageContainer = document.getElementById('imageContainer');
-    const y = 17-gridY;
-    const x = gridX;
+    let y = 16-gridY >= 10 ? `${16-gridY}` : `0${16-gridY}`  ;
+    let x = gridX >=10 ? `${gridX}` : `0${gridX}`;
     console.log(`(${x}, ${y})`);
-
-    const indexFromCoords = 7272 + y * 17 + x;
     const img = document.createElement('img');
-    img.src = 'chess/original/IMG_' + indexFromCoords + '.JPG'; // Path to your image
+
+    // Uncomment if using original dataset
+    // const indexFromCoords = 7272 + y * 17 + x;
+    // img.src = 'chess/original/IMG_' + indexFromCoords + '.JPG'; // Path to your image
+
+    img.src = 'chess/rectified/out_' + x + '_' + y + '.png'; // Path to your image
+
     img.alt = 'Dynamic Image';
     img.width = 640; // Set desired width
     img.height = 480; // Set desired height
