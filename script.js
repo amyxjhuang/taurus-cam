@@ -71,7 +71,6 @@ async function run() {
 
 function displayImageDynamically(gridX, gridY) {
     const imageContainer = document.getElementById('imageContainer');
-    imageContainer.innerHTML = ''; // Clear any existing content
 
     const indexFromCoords = 7272 + gridY * 17 + gridX;
     const img = document.createElement('img');
@@ -80,12 +79,20 @@ function displayImageDynamically(gridX, gridY) {
     img.width = 640; // Set desired width
     img.height = 480; // Set desired height
 
-    // Add the image to the container
+    // Add the new image to the container
     imageContainer.appendChild(img);
 
     // Use a timeout to ensure the image is added to the DOM before applying the class
-    // setTimeout(() => {
-    //     img.classList.add('visible');
-    // }, 10); // Small delay to trigger the transition
+    setTimeout(() => {
+        img.classList.add('visible');
+    }, 10); // Small delay to trigger the transition
+
+    // Remove the previous image after the transition
+    const previousImage = imageContainer.querySelector('img:not(.visible)');
+    if (previousImage) {
+        previousImage.addEventListener('transitionend', () => {
+            previousImage.remove();
+        });
+    }
 }
 run(); 
