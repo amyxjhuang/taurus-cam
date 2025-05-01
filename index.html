@@ -23,15 +23,21 @@
         #imageContainer img.visible {
             opacity: 1;
         }
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
     </style>
 </head>
 <body>
     <h1>Taurus Cam</h1>
     <p><a href="https://github.com/amyxjhuang/taurus-cam">Github Repository</a></p>
+    <div class="row">
     <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <canvas id="overlay" width="640" height="480"></canvas>
+    </div>
     <div id="imageContainer"></div>
 
-    <canvas id="overlay" width="640" height="480"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
     <script src="script.js" type="module"></script> 

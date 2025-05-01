@@ -90,6 +90,7 @@ function displayImageDynamically(gridX, gridY) {
     // Remove the previous image after the transition
     const previousImage = imageContainer.querySelector('img:not(.visible)');
     if (previousImage) {
+        console.log("REmoving previous image")
         previousImage.addEventListener('transitionend', () => {
             previousImage.remove();
         });
