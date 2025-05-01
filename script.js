@@ -73,14 +73,19 @@ function displayImageDynamically(gridX, gridY) {
     const imageContainer = document.getElementById('imageContainer');
     imageContainer.innerHTML = ''; // Clear any existing content
 
-    const indexFromCoords = 7272 + gridX * 17 + gridY;
+    const indexFromCoords = 7272 + gridY * 17 + gridX;
     const img = document.createElement('img');
     img.src = 'chess/original/IMG_' + indexFromCoords + '.JPG'; // Path to your image
     img.alt = 'Dynamic Image';
     img.width = 640; // Set desired width
     img.height = 480; // Set desired height
 
+    // Add the image to the container
     imageContainer.appendChild(img);
-}
 
+    // Use a timeout to ensure the image is added to the DOM before applying the class
+    // setTimeout(() => {
+    //     img.classList.add('visible');
+    // }, 10); // Small delay to trigger the transition
+}
 run(); 
