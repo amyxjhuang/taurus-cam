@@ -73,8 +73,8 @@ async function run() {
 function displayImageDynamically(gridX, gridY) {
     const imageContainer = document.getElementById('imageContainer');
     let y = 16-gridY >= 10 ? `${16-gridY}` : `0${16-gridY}`  ;
-    let x = 16-gridX >= 10 ? `${16-gridX}` : `0${16-gridX}`  ;
-    // let x = gridX >=10 ? `${gridX}` : `0${gridX}`;
+    // let x = 16-gridX >= 10 ? `${16-gridX}` : `0${16-gridX}`  ;
+    let x = gridX >=10 ? `${gridX}` : `0${gridX}`;
     console.log(`(${x}, ${y})`);
     const img = document.createElement('img');
 
