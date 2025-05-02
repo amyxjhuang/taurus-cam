@@ -81,7 +81,7 @@ function displayImageDynamically(gridX, gridY) {
     // const indexFromCoords = 7272 + y * 17 + x;
     // img.src = 'chess/original/IMG_' + indexFromCoords + '.JPG'; // Path to your image
 
-    img.src = 'chess/rectified/out_' + x + '_' + y + '.png'; // Path to your image
+    img.src = 'chess/rectified/out_' + y + '_' + x + '.png'; // Path to your image
 
     img.alt = 'Dynamic Image';
     img.width = 640; // Set desired width
