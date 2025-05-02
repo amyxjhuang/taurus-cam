@@ -73,7 +73,8 @@ async function run() {
 function displayImageDynamically(gridX, gridY) {
     const imageContainer = document.getElementById('imageContainer');
     let y = 16-gridY >= 10 ? `${16-gridY}` : `0${16-gridY}`  ;
-    let x = gridX >=10 ? `${gridX}` : `0${gridX}`;
+    let x = 16-gridX >= 10 ? `${16-gridX}` : `0${16-gridX}`  ;
+    // let x = gridX >=10 ? `${gridX}` : `0${gridX}`;
     console.log(`(${x}, ${y})`);
     const img = document.createElement('img');
 
@@ -123,4 +124,17 @@ function displayImageDynamically(gridX, gridY) {
 //     console.log(`Active container: ${activeContainerId}`);
 // });
 
-run(); 
+run();
+
+document.getElementById('fullscreenToggle').addEventListener('click', toggleFullscreen);
+
+function toggleFullscreen() {
+    const imageContainer = document.getElementById('imageContainer');
+    if (!document.fullscreenElement) {
+        imageContainer.requestFullscreen().catch(err => {
+            alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+} 
